@@ -1,16 +1,12 @@
 import { writable } from 'svelte/store'
 
-const forecasts = writable([])
-
+const forecast = writable({})
 
 const forecastStore = {
-    subscribe: forecasts.subscribe,
-    setForecasts: forecastList => {
-        forecasts.set(forecastList)
+    subscribe: forecast.subscribe,
+    setForecast: forecastData => {
+        forecast.set(forecastData)
     },
-    addForecast: forecastQuery => {
-        forecasts.update(items => [forecastQuery,...items])
-    }
 }
 
 export default forecastStore
