@@ -2,32 +2,16 @@
 const weatherKey = import.meta.env.VITE_WEATHER_KEY
 import forecastStore from '../data/forecast-store'
 
-export let forecastQueryId = null;
-
 let queryValue = ""
 
-if(forecastQueryId){
-    const unsubscribe = forecastStore.subscribe(items => {
-        const selectedForecast = items.find( ({id}) => id === forecastQueryId);
-        queryValue = selectedForecast.value
-    })
-    unsubscribe();
-}
-
-
-
-
 function handleSubmit(){
-    const forecastQuery = {
-        id: Math.floor(Math.random() * 181) + 1,
-        query: queryValue
-    }
-    const weatherUrl = `https://api.weatherapi.com/v1/forecast.json?key=${weatherKey}&q=${queryValue}&days=5&aqi=no&alerts=no`
+    const weatherUrl = `https://api.weatherapi.com/v1/forecast.json?key=${weatherKey}&q=${queryValue}&days=6&aqi=no&alerts=no`
     fetch(weatherUrl).then(res => {
         if(!res.ok) throw new Error("An error ocurred.")
         return res.json()
     }).then(data => {
-        forecastStore.addForecast({...forecastQuery, data})
+        // console.log(data.forecast)
+        forecastStore.setForecast(data)
     }).catch(console.error)
 }
 
@@ -46,7 +30,6 @@ function handleSubmit(){
         placeholder="Search for weather" />
     <button 
         type="submit"
-        on:click={handleSubmit}
         class="inline-block py-2 px-4 text-xs text-lg text-center text-white uppercase bg-blue-700 rounded-r shadow ripple hover:shadow-lg hover:bg-blue-800 focus:outline-none"
     >Find</button>
 </form>
