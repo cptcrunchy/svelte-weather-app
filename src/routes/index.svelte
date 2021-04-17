@@ -2,13 +2,13 @@
 	import Header from '$lib/Header.svelte';
 	import Search from '$lib/Search.svelte';
 	import CardGrid from '$lib/CardGrid.svelte';
-	let weatherQuery = "";
-	$:console.log(weatherQuery)
+	
 </script>
 
 <svelte:head>
 	<title>Svelte Weather</title>
 </svelte:head>
+
 <Header />
 <main>
 	<Search />
