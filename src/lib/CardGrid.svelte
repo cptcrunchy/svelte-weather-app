@@ -9,7 +9,7 @@
         {#each $forecastStore.forecast.forecastday as forecast}
             <Card {forecast} locationInfo={$forecastStore.location} />
         {/each}
-    {:else}
+    {:else}      
         <p>Search for weather in your area</p>
     {/if}
 </div>
