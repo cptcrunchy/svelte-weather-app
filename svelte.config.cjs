@@ -22,6 +22,9 @@ module.exports = {
 		target: '#svelte',
 
 		vite: {
+			optimizeDeps: {
+				include: ["fastq"]
+			},
 			ssr: {
 				noExternal: Object.keys(pkg.dependencies || {})
 			}
